@@ -1,13 +1,15 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const width = window.innerWidth;
-const height = window.innerHeight;
+const container = document.getElementById("renderer");
+
+const width = container.clientWidth;
+const height = container.clientHeight;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
 renderer.setAnimationLoop(animate);
-document.body.appendChild(renderer.domElement);
+container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 
@@ -45,17 +47,20 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-function onWindowResize() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+const resizeObserver = new ResizeObserver(() => {
+  const newWidth = container.clientWidth;
+  const newHeight = container.clientHeight;
 
-  camera.left = width / -2;
-  camera.right = width / 2;
-  camera.top = height / 2;
-  camera.bottom = height / -2;
+  // Update camera
+  camera.left = newWidth / -2;
+  camera.right = newWidth / 2;
+  camera.top = newHeight / 2;
+  camera.bottom = newHeight / -2;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(width, height);
-}
+  // Update renderer
+  renderer.setSize(newWidth, newHeight);
+});
 
-window.addEventListener("resize", onWindowResize);
+// Observe the container for size changes
+resizeObserver.observe(container);
