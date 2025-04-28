@@ -14,10 +14,6 @@
       <div id="frame">
         <!-- DESIGN AREA -->
         <div id="design">
-          <div id="level">
-            <a href="/">Chunk level</a> /
-            <a href="tile.html">Tile level</a>
-          </div>
           <div id="renderer"></div>
         </div>
 
@@ -25,8 +21,10 @@
         <div id="custom">
           <!-- Seed Controls -->
           <div id="seed">
-            <input type="checkbox" id="use-seed" />
-            <label for="use-seed">Use seed?</label>
+            <div id="use-seed-div">
+              <label for="use-seed">Use seed?</label>
+              <input type="checkbox" id="use-seed" />
+            </div>
             <input type="text" id="no" placeholder="Enter seed" disabled />
             <p id="seed-display"></p>
           </div>
