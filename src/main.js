@@ -15,6 +15,8 @@ const generateButton  = document.getElementById("add-button");
 const exportButton = document.getElementById("export-button");
 const importButton = document.getElementById("import-button");
 const input = document.getElementById("import-input");
+const exportPngButton = document.getElementById("export-png-button");
+
 
 
 loadSettings();
@@ -87,6 +89,16 @@ function startWithSeed(s){
   initGrid(scene, seed);
 }
 
+function exportCanvasAsPng(){
+  renderer.render(scene, camera);
+  const dataURL = renderer.domElement.toDataURL("image/png");
+
+  const a = document.createElement("a");
+  a.href = dataURL;
+  a.download = "map_export.png";
+  a.click();
+}
+
 // generate click
 generateButton.addEventListener("click", ()=>{
   saveSettings();
@@ -134,6 +146,11 @@ input.addEventListener("change", ()=>{
     });
   }
 });
+
+exportPngButton.addEventListener("click", ()=>{
+  exportCanvasAsPng();
+});
+
 
 // animation
 function animate(){
