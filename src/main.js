@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { initGrid, stepWFC, drawGrid, grid } from "./logic.js";
 import { allowedChunks } from "./chunk_page.js";
-import { saveSettings, loadSettings, saveGrid, loadGrid, exportGridToFile, importGridFromFile } from "./storage.js";
+import { saveSettings, loadSettings, exportGridToFile, importGridFromFile } from "./storage.js";
 
 
 // DOM
@@ -102,7 +102,7 @@ generateButton.addEventListener("click", ()=>{
 
 // Export button
 exportButton.addEventListener("click", ()=>{
-  exportGridToFile();
+  exportGridToFile(seed);
 });
 
 // Import button
@@ -115,10 +115,9 @@ input.addEventListener("change", ()=>{
     importGridFromFile(file).then((importedSeed)=>{
       // after the file is successfully loaded:
       drawGrid(scene);
-  
+      console.log(importedSeed);
       if (importedSeed != null) {
         seed = importedSeed; // set seed value
-        
         seedInput.disabled = false;
         seedInput.style.display = "block";
         seedInput.value = seed;
