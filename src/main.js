@@ -31,6 +31,7 @@ const camera = new THREE.OrthographicCamera(
   width/-2, width/2, height/2, height/-2, 0.1, 2000
 );
 camera.position.set(0,0,1000);
+camera.zoom = 0.8;
 
 const controls = new OrbitControls(camera,renderer.domElement);
 controls.enableRotate  = false;
