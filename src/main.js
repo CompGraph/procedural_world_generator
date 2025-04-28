@@ -112,7 +112,27 @@ importButton.addEventListener("click", ()=>{
 input.addEventListener("change", ()=>{
   const file = input.files[0];
   if (file) {
-    importGridFromFile(file);
+    importGridFromFile(file).then((importedSeed)=>{
+      // after the file is successfully loaded:
+      drawGrid(scene);
+  
+      if (importedSeed != null) {
+        seed = importedSeed; // set seed value
+        
+        seedInput.disabled = false;
+        seedInput.style.display = "block";
+        seedInput.value = seed;
+        
+        seedDisplay.textContent = `This is seed: ${seed}`;
+        seedDisplay.style.display = "block";
+        
+        useSeedCheckbox.checked = true;
+      }
+  
+      done = true;
+    }).catch(e=>{
+      console.error("❌ Failed to import grid", e);
+    });
   }
 });
 

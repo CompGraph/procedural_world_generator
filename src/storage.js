@@ -64,13 +64,16 @@ export function loadGrid(){
 }
 
 // ─── Save grid to file ───
-export function exportGridToFile(){
-    const snapshot = grid.map(row => 
-      row.map(cell => ({
-        collapsed: cell.collapsed,
-        possible: [...cell.possible],
-      }))
-    );
+export function exportGridToFile(seed){
+    const snapshot = {
+      seed: seed,
+      grid: grid.map(row => 
+        row.map(cell => ({
+          collapsed: cell.collapsed,
+          possible: [...cell.possible],
+        }))
+      )
+    };
     const blob = new Blob([JSON.stringify(snapshot)], {type: "application/json"});
     const url = URL.createObjectURL(blob);
     
@@ -84,26 +87,31 @@ export function exportGridToFile(){
   
 // ─── Load grid from uploaded file ───
 export function importGridFromFile(file){
-    return new Promise((resolve, reject)=>{
-      const reader = new FileReader();
-      reader.onload = function(event){
-        try {
-          const snapshot = JSON.parse(event.target.result);
-          for (let y=0; y<snapshot.length; y++){
-            for (let x=0; x<snapshot[y].length; x++){
-              grid[y][x].collapsed = snapshot[y][x].collapsed;
-              grid[y][x].possible  = snapshot[y][x].possible;
-              grid[y][x].drawn     = false;
-            }
-          }
-          console.log("Grid loaded from file!");
-          resolve(); // ✅ tell main.js it's ready
-        } catch(e){
-          console.error("Failed to import grid", e);
-          reject(e);
-        }
-      };
-      reader.readAsText(file);
-    });
-  }
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onload = function(event){
+      try {
+        const snapshot = JSON.parse(event.target.result);
 
+        // Restore grid
+        const importedGrid = snapshot.grid;
+        if (!importedGrid) throw new Error("No grid data found");
+
+        for (let y=0; y<importedGrid.length; y++){
+          for (let x=0; x<importedGrid[y].length; x++){
+            grid[y][x].collapsed = importedGrid[y][x].collapsed;
+            grid[y][x].possible  = importedGrid[y][x].possible;
+            grid[y][x].drawn     = false;
+          }
+        }
+
+        // Optionally, return the seed
+        resolve(snapshot.seed); // 👈 resolve with seed too
+      } catch(e){
+        console.error("Failed to import grid", e);
+        reject(e);
+      }
+    };
+    reader.readAsText(file);
+  });
+}
