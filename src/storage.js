@@ -35,34 +35,6 @@ export function loadSettings(){
   }
 }
 
-// ─── Optionally save the grid (advanced bonus) ───
-export function saveGrid(){
-  const snapshot = grid.map(row => 
-    row.map(cell => ({
-      collapsed: cell.collapsed,
-      possible: [...cell.possible],
-    }))
-  );
-  localStorage.setItem("gridData", JSON.stringify(snapshot));
-}
-
-// ─── Optionally load the grid (advanced bonus) ───
-export function loadGrid(){
-  const raw = localStorage.getItem("gridData");
-  if (!raw) return;
-  try {
-    const snapshot = JSON.parse(raw);
-    for (let y=0; y<snapshot.length; y++){
-      for (let x=0; x<snapshot[y].length; x++){
-        grid[y][x].collapsed = snapshot[y][x].collapsed;
-        grid[y][x].possible  = snapshot[y][x].possible;
-      }
-    }
-  } catch(e){
-    console.error("Failed to load grid", e);
-  }
-}
-
 // ─── Save grid to file ───
 export function exportGridToFile(seed){
     const snapshot = {
@@ -104,9 +76,8 @@ export function importGridFromFile(file){
             grid[y][x].drawn     = false;
           }
         }
-
         // Optionally, return the seed
-        resolve(snapshot.seed); // 👈 resolve with seed too
+        resolve(snapshot.seed);
       } catch(e){
         console.error("Failed to import grid", e);
         reject(e);
