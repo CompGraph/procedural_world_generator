@@ -57,7 +57,23 @@ body {
 }
 
 /* Generate Button */
-#add-button {
+#add-button  {
+  margin-top: auto; align-self: center;
+  width: 60%; padding: 0.5rem 1rem;
+  background: #E3E3E3; border-radius: 12px;
+  text-align: center; cursor: pointer; font-weight: bold;
+  box-sizing: border-box;
+}
+
+#export-button  {
+  margin-top: auto; align-self: center;
+  width: 60%; padding: 0.5rem 1rem;
+  background: #E3E3E3; border-radius: 12px;
+  text-align: center; cursor: pointer; font-weight: bold;
+  box-sizing: border-box;
+}
+
+#import-button  {
   margin-top: auto; align-self: center;
   width: 60%; padding: 0.5rem 1rem;
   background: #E3E3E3; border-radius: 12px;

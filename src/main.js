@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { initGrid, stepWFC, drawGrid, grid } from "./logic.js";
 import { allowedChunks } from "./chunk_page.js";
+import { saveSettings, loadSettings, saveGrid, loadGrid, exportGridToFile, importGridFromFile } from "./storage.js";
+
 
 // DOM
 const container       = document.getElementById("renderer");
@@ -10,6 +12,12 @@ const useSeedCheckbox = document.getElementById("use-seed");
 const seedInput       = document.getElementById("no");
 const seedDisplay     = document.getElementById("seed-display");
 const generateButton  = document.getElementById("add-button");
+const exportButton = document.getElementById("export-button");
+const importButton = document.getElementById("import-button");
+const input = document.getElementById("import-input");
+
+
+loadSettings();
 
 // Three.js
 let width  = container.clientWidth;
@@ -60,6 +68,12 @@ function startWithSeed(s){
     c.collapsed = false; c.drawn = false; c.possible = base.slice();
   }));
 
+  function clearSceneMeshes(){
+    scene.children
+      .filter(o=>o.isMesh)
+      .forEach(o=>scene.remove(o));
+  }  
+
   // show & store seed
   seed = s>>>0;
   seedInput.style.display   = "block";
@@ -74,6 +88,7 @@ function startWithSeed(s){
 
 // generate click
 generateButton.addEventListener("click", ()=>{
+  saveSettings();
   let s;
   if(useSeedCheckbox.checked){
     s = parseInt(seedInput.value,10);
@@ -82,6 +97,22 @@ generateButton.addEventListener("click", ()=>{
     s = Math.floor(Math.random()*0xffffffff);
   }
   startWithSeed(s);
+});
+
+// Export button
+exportButton.addEventListener("click", ()=>{
+  exportGridToFile();
+});
+
+// Import button
+importButton.addEventListener("click", ()=>{
+  input.click(); // Open file picker
+});
+input.addEventListener("change", ()=>{
+  const file = input.files[0];
+  if (file) {
+    importGridFromFile(file);
+  }
 });
 
 // animation
