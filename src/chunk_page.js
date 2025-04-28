@@ -22,8 +22,15 @@ if (!gridTable) {
     cb.dataset.id= idx;
     cb.addEventListener("change", ()=>{
       const i = Number(cb.dataset.id);
-      if(cb.checked) allowedChunks.add(i);
-      else           allowedChunks.delete(i);
+      if(cb.checked) {
+        allowedChunks.add(i);
+        slider.value = 1;
+        setTileWeight(idx, 1);
+      } else {
+        allowedChunks.delete(i);
+        slider.value = 0;
+        setTileWeight(idx, 0);
+      }          
     });
 
     // label + swatch + name
@@ -51,6 +58,15 @@ if (!gridTable) {
     slider.addEventListener("input", ()=>{
       setTileWeight(idx, Number(slider.value));
     });
+
+    slider.addEventListener("change", () => {
+      setTileWeight(idx, Number(slider.value));
+      if (slider.value == 0) {
+        cb.checked = false;
+      } else {
+        cb.checked = true;
+      }
+    })
 
     // assemble
     item.append(cb, label, slider);
