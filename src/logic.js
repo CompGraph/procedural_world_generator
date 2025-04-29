@@ -10,13 +10,13 @@ export const tileSet = [
     canConnectTo: [0, 1, 3],
     textures: [
       1,
-      ["public/sprites/Houses.png", [4, 3], []],
-      ["public/sprites/Huts.png", [1, 5], []],
-      ["public/sprites/Market.png", [4, 3], []],
-      ["public/sprites/Resources.png", [5, 3], []],
-      ["public/sprites/Tarverns.png", [4, 3], []],
-      ["public/sprites/Workshops.png", [3, 3], []],
-      ["public/sprites/Wheatfield.png", [1, 4], []],
+      ["/public/sprites/Houses.png", [4, 3], []],
+      ["/public/sprites/Huts.png", [1, 5], []],
+      ["/public/sprites/Market.png", [4, 3], []],
+      ["/public/sprites/Resources.png", [5, 3], []],
+      ["/public/sprites/Tarverns.png", [4, 3], []],
+      ["/public/sprites/Workshops.png", [3, 3], []],
+      ["/public/sprites/Wheatfield.png", [1, 4], []],
     ],
   },
   {
@@ -24,7 +24,7 @@ export const tileSet = [
     name: "Plain",
     color: 0xbee8a5,
     canConnectTo: [0, 1, 2, 3, 4, 5],
-    textures: [-1, ["public/sprites/Grass.png", [0, 5], [[0, 1]]]],
+    textures: [-1, ["/public/sprites/Grass.png", [0, 5], [[0, 1]]]],
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ export const tileSet = [
     textures: [
       1,
       [
-        "public/sprites/WinterTrees.png",
+        "/public/sprites/WinterTrees.png",
         [4, 4],
         [
           [0, 1],
@@ -58,7 +58,7 @@ export const tileSet = [
     textures: [
       1,
       [
-        "public/sprites/Cliff.png",
+        "/public/sprites/Cliff.png",
         [9, 7],
         [
           [0, 3],
@@ -72,14 +72,14 @@ export const tileSet = [
     name: "Sand",
     color: 0xe8d897,
     canConnectTo: [1, 4, 5],
-    textures: [-1, ["public/sprites/Shore.png", [0, 5], [[0, 0]]]],
+    textures: [-1, ["/public/sprites/Shore.png", [0, 5], [[0, 0]]]],
   },
   {
     id: 5,
     name: "River",
     color: 0x94bdec,
     canConnectTo: [1, 4, 5],
-    textures: [-1, ["public/sprites/Shore.png", [0, 5], [[0, 3]]]],
+    textures: [-1, ["/public/sprites/Shore.png", [0, 5], [[0, 3]]]],
   },
 ];
 
