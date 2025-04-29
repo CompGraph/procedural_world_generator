@@ -19,7 +19,7 @@ const exportPngButton = document.getElementById("export-png-button");
 
 
 
-loadSettings();
+//loadSettings();
 
 // Three.js
 let width  = container.clientWidth;
