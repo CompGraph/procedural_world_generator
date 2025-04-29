@@ -1,4 +1,4 @@
-// import * as THREE from "three";
+import * as THREE from "three";
 
 // ─── Tile definitions ───
 // 0=Village,1=Plain,2=Forest,3=Hill,4=Sand,5=River
