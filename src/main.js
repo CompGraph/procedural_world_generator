@@ -1,6 +1,6 @@
 import "./chunk_page.js";
 // import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { initGrid, stepWFC, drawGrid, grid } from "./logic.js";
 import { allowedChunks } from "./chunk_page.js";
 import { saveSettings, loadSettings, exportGridToFile, importGridFromFile } from "./storage.js";
