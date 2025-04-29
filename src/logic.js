@@ -270,7 +270,7 @@ function cropSprite(texture, totalRows, totalColumns, row, column) {
   croppedTexture.repeat.set(frameWidth, frameHeight);
   croppedTexture.offset.set(
     (column+1/32) * frameWidth,
-    1 - frameHeight - (row-1/32) * frameHeight
+    1 - frameHeight - (row+1/32) * frameHeight
   );
   croppedTexture.needsUpdate = true;
   croppedTexture.center.set(0, 0); // Important to reset center if needed
